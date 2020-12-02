@@ -1,0 +1,6 @@
+ Day1←{
+⍝ ⍺: part (1 or 2)
+⍝ ⍵: numeric problem input
+⍝ ←: answer
+     ×/⍵⌷⍨1⌷⍸2020=(⍵∘.+⊢)⍣⍺⊢⍵
+ }
