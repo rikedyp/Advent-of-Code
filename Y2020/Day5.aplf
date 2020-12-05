@@ -1,0 +1,11 @@
+ Day5←{
+     p←↑(⎕UCS 10 13)((~∊⍨)⊆⊢)⍵
+⍝ Part 1
+     ID←{+/8 1×2⊥¨'FB' 'LR'⍳¨⍵⊂⍤↑⍤0 99⍨7 ¯3}
+     ids←ID⍤1⊢p
+     p1←⌈⌿ids
+⍝ Part 2
+     first←⌊⌿ids
+     all←first+⍳(1+≢ids)-first
+     all~ids
+ }
