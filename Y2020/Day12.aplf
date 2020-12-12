@@ -1,0 +1,21 @@
+ Day12←{
+     i←↑1 1∘⊂¨nl split ⍵
+     (ins val)←↓⍉i
+     ins←∊ins    ⍝ Instructions
+     val←⍎¨val   ⍝ Values
+⍝ Part 1
+     rot←,(val×⍤0 1⊢1 ¯1 0×○÷180)⌷⍤0 1⍨'LR'⍳ins       ⍝ Rotations in radians
+     dir←1↓⌊×\0J1,*0J1×rot                            ⍝ Direction at each moment
+     movetable←0,⍨(¯1 1 0J1 0J¯1,⍤1 0⊢dir)×⍤1 0⊢val   ⍝ Possible moves
+     moves←movetable⌷⍤0 1⍨'NSEWF'⍳ins                 ⍝ Actual moves
+     p1←+/|9 11○+/moves                               ⍝ Manhatten distance from origin
+⍝ Part 2
+     wp←¯1J10 ⍝ Waypoint start
+     _←{
+         'LR'∨/⍤∊⍵⌷ins:wp∘←wp,(⊃⌽wp)×*0J1×⍵⌷rot   ⍝ Rotate left or right
+         'NSEW'∨/⍤∊⍵⌷ins:wp∘←wp,(⊃⌽wp)+⍵⌷moves    ⍝ Translate north, south, east or west
+         wp∘←wp,⊃⌽wp                              ⍝ Forward movement of vessel
+         0
+     }¨⍳≢i
+     +/|9 11○+/val×⍥(('F'=ins)/⊢)(1↓wp)           ⍝ Manhatten distance of vessel from origin
+ }
