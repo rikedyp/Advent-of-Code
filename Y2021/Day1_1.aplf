@@ -1,0 +1,8 @@
+ Day1_1←{
+     +/0<¯2-/⍎¨snl ⍵
+⍝              snl ⍵   ⍝ A nested vector of character vectors for each line
+⍝            ⍎¨        ⍝ A list of numbers
+⍝        ¯2-/          ⍝ Differences between consecutive numbers (pair-wise difference)
+⍝      0<              ⍝ Positive differences
+⍝    +/                ⍝ Count how many
+ }

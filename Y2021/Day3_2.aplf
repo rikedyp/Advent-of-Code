@@ -1,0 +1,26 @@
+ Day3_2←{
+     b←↑⍎¨¨snl ⍵                                  ⍝ Input as Boolean matrix
+     _S←{                                         ⍝ Row filtering "scrub" operator
+         ⍺←1                                      ⍝ Start on first column
+         1<≢⍵:(⍺+1)∇ ⍵⌿⍨i=(⍺⍺+⌿÷≢)i←⍺(⌷⍤1)⍵
+         ,⍵                                       ⍝ Return the last remaining row after successive filtering
+
+⍝        1≤≢⍵:(⍺+1)∇                              ⍝ Until there is one row left
+⍝                    ⍵⌿⍨i=                        ⍝ Select rows with bit of kind
+⍝                         (⍺⍺+⌿÷≢)                ⍝ Which matches the result of the comparison
+⍝                                                   For example, 0.25∘≤ means a quarter or more are 1s
+⍝                                 i←⍺(⌷⍤1)⍵       ⍝ In successive columns from the left to the right
+     }
+     gt←0.5∘≤ ⋄ lt←0.5∘>    ⍝ Half or greater (gt) or less than half (lt) are 1s
+     (gt _S×⍥(2∘⊥)lt _S)b
+⍝    (gt _S       lt _S)b   ⍝ Rows filtered with the scrub operator
+⍝          × (2∘⊥)          ⍝ Multply together after converting each from base 2 into base 10
+⍝           ⍥
+
+⍝    While quite a lovely encoding, the over (⍥) does two separate base conversions in principle
+⍝    if _S returns a 1-row matrix, we can use the high-rank definition of decode (⊥)
+     ×/2⊥⍉(gt _S⍪lt _S)b
+⍝    In practice, there is no performance benefit for 2 numbers, but there may be
+⍝    for converting the result of many comparisons. It is also easier to generalise in this encoding:
+     ×/2⊥⍉(0.5∘≤_S⍪0.48∘≤_S⍪0.45∘<_S⍪0.69∘≥_S⍪0.42∘≥_S)b
+ }

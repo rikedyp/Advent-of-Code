@@ -1,0 +1,12 @@
+ Day2_2←{
+     input←snl ⍵               ⍝ One instruction per line
+     x←⍎¨⊃∘⌽¨input             ⍝ X values
+     direction←'ufd'⍳⊃¨input   ⍝ 1     2       3
+                               ⍝ up forward down
+     aim←+\x×¯2+direction      ⍝ Aim is value times ¯1 (up) or 1 (down)
+                               ⍝ Forward (0) does not change aim
+     forward←2=direction
+     position←+/x×forward
+     depth←+/aim×x×forward
+     position×depth
+ }

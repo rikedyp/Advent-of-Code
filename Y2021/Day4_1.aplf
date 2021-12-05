@@ -1,0 +1,14 @@
+ Day4_1←{
+     (n b)←ht sec input4     ⍝ Called numbers (n) and bingo boards (b)
+     n←⍎⊃n ⋄ b←⍎⍤1↑⍣≡snl¨b   ⍝ Convert to numeric arrays
+     C←∨/∧/,∧⌿               ⍝ Check for complete row or column
+     FirstWinningBoard←{
+         ⍺←1                    ⍝ Call the first number
+         c←⍵∊⍺↑n                ⍝ Numbers called on the boards
+         ∨/win←(C⍤2)c:(⍸win)⍺   ⍝ Any winning boards?
+         (⍺+1)∇ ⍵               ⍝ Otherwise, call another number
+     }
+     (w i)←FirstWinningBoard b   ⍝ Winning board number and position of last number called
+     wb←w⌷b ⋄ wn←i⌷n             ⍝ Winning board and winning number
+     wn×+/wb/⍥,⍨~wb∊i↑n          ⍝ Last number called times the sum of unmarked numbers in winning board
+ }

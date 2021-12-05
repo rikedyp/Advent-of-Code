@@ -1,0 +1,8 @@
+ Day5_1←{
+     _←'to'⎕CY'dfns'                       ⍝ Import library function "to"
+     segments←↑⍎¨'->'spl⍤1↑snl ⍵           ⍝ Each 2-cell (submatrix) is a pair of x-y co-ordinates
+                                           ⍝ defining a line segment
+     HV←{⍵⌿⍨∨/(=⌿⍤2)⍵}                     ⍝ Horizontal and vertical segments only
+     points←↑⊃,/,¨/↑(⊂to⌿)⍤2⊢HV segments   ⍝ Co-ordinates of points defining line segments
+     +/2≤≢⍤⊢⌸points                        ⍝ Count of points belonging to 2 or more line segments
+ }

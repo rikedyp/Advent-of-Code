@@ -1,0 +1,13 @@
+ Day2_1←{
+⍝ This solution uses complex numbers to represent 2-dimensional co-ordinates (horzontal position and depth)
+     input←snl ⍵                                           ⍝ One instruction per line
+     ×/9 11∘.○((⍎⊃∘⌽)¨input)+.×1 0J1 0J¯1['fdu'⍳⊃¨input]
+⍝                                         'fdu'⍳⊃¨input    ⍝ forward, down or up?
+⍝                              1 0J1 0J¯1[             ]   ⍝ 1 means +1 horizontal position
+⍝                                                          ⍝ 0J1  is +1 depth
+⍝                                                          ⍝ 0J¯1 is ¯1 depth
+⍝             ((⍎⊃∘⌽)¨input)                               ⍝ X values (magnitudes) are the last character in each line
+⍝                           +.×                            ⍝ Sum of magnitudes times directions
+⍝      9 11∘.○                                             ⍝ Separate final co-ordinates
+⍝    ×/                                                    ⍝ Multiply final co-ordinates
+ }

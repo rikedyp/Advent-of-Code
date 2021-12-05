@@ -1,0 +1,7 @@
+ Day3_1←{
+     input←↑⍎¨¨snl input3   ⍝ Convert to Boolean matrix
+     (2∘⊥×2⊥~)(0.5<+⌿÷≢)input
+⍝             (0.5≤+⌿÷≢)input   ⍝ Half or more (majority) are ones for each column
+⍝        ×                      ⍝ Multiply together majority (⊢) and minority (~)
+⍝    (2∘⊥ 2⊥~)                  ⍝ After converting to base 10
+ }
