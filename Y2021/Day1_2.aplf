@@ -1,6 +1,8 @@
  Day1_2←{
 ⍝ My solution was identical to Day1_1 but with the 3+/
 
+⍝ Thanks to @rak1507 for pointing out {0<¯2-/⍵} ←→ {2</⍵}
+
 ⍝ It is possible without the size-3 windowed reduction, since ((a+b+c) < b+c+d) ≡ a < d
 ⍝ resulting in this beautiful version:
 
@@ -9,11 +11,10 @@
 ⍝ Thanks to @Bubbler and @xpqz for the hint and solution. See:
 ⍝ https://gist.github.com/xpqz/d406eb493fd2a875ae463cce009463af
 
-     +/0<¯2-/3+/⍎¨snl ⍵
-⍝                 snl ⍵   ⍝ A nested vector of character vectors for each line
-⍝               ⍎¨        ⍝ A list of numbers
-⍝            3+/          ⍝ Size-3 sliding window sum
-⍝        ¯2-/             ⍝ Differences between consecutive numbers (pair-wise difference)
-⍝      0<                 ⍝ Positive differences
-⍝    +/                   ⍝ Count how many
+     +/2</3+/⍎¨snl ⍵
+⍝              snl ⍵   ⍝ A nested vector of character vectors for each line
+⍝            ⍎¨        ⍝ A list of numbers
+⍝         3+/          ⍝ Size-3 sliding window sum
+⍝      2</             ⍝ Positive pair-wise differences between consecutive sums
+⍝    +/                ⍝ Count how many
  }
