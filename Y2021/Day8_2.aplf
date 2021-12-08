@@ -1,0 +1,31 @@
+ Day8_2←{
+⍝ 1 4 7 8
+⍝ 2 4 3 7
+     ⎕IO←0
+⍝     +/2 3 4 7∊⍨∊{≢¨' 'spl⊃⌽⍵}¨'|'spl¨snl ⍵
+     a←¯1 ⎕C ⎕A
+     d←'abcefg' 'cf' 'acdeg' 'acdfg' 'bcdf' 'abdfg' 'abdefg' 'acf' 'abcdefg' 'abcdfg'
+     ⍝ Simultaneous letter set equations
+     sl←{⍵⌿⍨⍺=≢¨⍵} ⍝ select by length
+     Solve←{
+         (i n)←'|'spl ⍵ ⋄ i←' 'spl i
+         (cf bcdf acf abcdefg)←,i⌿⍤1⍨2 4 3 7∘.=≢¨i
+         a←acf~cf
+         bd←bcdf~cf
+         aeg←abcdefg~bcdf
+         eg←aeg~a
+         (bcef cde)←1⊂⍤∪⍤∊⍤sl∘,⍤2∘.~⍤1⍨i⌿⍤1⍨5 6∘.=≢¨i
+         (adg abfg)←∩/i⌿⍤1⍨5 6∘.=≢¨i
+         d←adg~abfg
+         b←bd~d
+         e←eg~adg
+         ce←abcdefg~abfg,adg
+         c←ce~eg
+         e←ce~c
+         f←cf~c
+         g←eg~e
+         r←∊a b c d e f g
+         D⍳∆¨(¯1 ⎕C ⎕A)∘{⍺[⍵]}¨r∘⍳¨' 'spl n
+     }
+     10⊥+⌿Solve⍤1↑snl ⍵
+ }
