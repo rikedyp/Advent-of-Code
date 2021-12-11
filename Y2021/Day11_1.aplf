@@ -1,0 +1,8 @@
+ Day11_1←{
+     o←↑⍎¨¨snl ⍵   ⍝ Octopus energy levels
+     c←0
+     F←{a←0≠⍵ ⋄ f←10≤⍵×a ⋄ c+←+/,f ⋄ r←(a∧~f)×{+/,⍵}⌺3 3⊢f ⋄ 0@(⍸f)⊢r+⍵ ⋄ a f r ⍵}⍣≡
+     S←F 1∘+
+     _←S⍣100⊢o
+     c
+ }
