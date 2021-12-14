@@ -1,0 +1,15 @@
+ Day13_2←{
+     _←''∘⎕NS¨'#.kit.'∘,¨'snl' 'spl' 'sec' '∆'
+     ⎕IO←0
+     (c i)←sec ⍵   ⍝ Co-ordinates, instructions
+     p←⍸⍣¯1 ∆⍎¨snl c
+     F←{
+         0∊⍴⍵:⍺
+         p←⍺ ⋄ (a n)←⊃⍵
+         a←'xy'⍳a ⋄ n←⍎n ⋄ h←n@a⍴p
+         t←h↑n↑[a]p ⋄ b←h↑⌽[a](n-1)↓[a]p
+         (t∨b)∇ 1↓⍵
+     }
+     f←{'='(≠⊆⊢)⊃⌽' '(≠⊆⊢)⍵}¨snl i ⍝ Fold specifications
+     p F f
+ }

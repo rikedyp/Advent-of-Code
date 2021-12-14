@@ -1,0 +1,53 @@
+ Day9_2←{
+     h←↑⍎¨¨snl ⍵
+     d←4 2⍴¯1 0 0 ¯1 1 0 0 1
+     bi←{⍸b←⍵=1 1↓¯1 ¯1↓{⌊/,⍵}⌺3 3⊢99,99⍪99⍪⍨99,⍨⍵}h
+
+     Basin←{
+     ⍝ ⍵: basin point
+⍝ ∇: new points to search from
+ ⍝ ⍺: basin points found so far
+ ⍝ ←: size of basin
+
+         searched←0 2⍴0
+
+         Remove←{⍺⌿⍨~(⍳≢⍺)∊⍺⍳⍵}
+         _Keep←{⍵⌿⍨∧/⍺⍺⍤1⊢⍵}
+
+         Search←{
+             ⍺←0 2⍴0
+             neighbours←≥∘1 1 _Keep≤∘(⍴h)_Keep d(+⍤1)⍵
+             basin←neighbours⌿⍨9≠neighbours⌷⍤1 99⊢h
+             next←basin Remove ⍵⍪searched
+             searched∘←∪searched⍪⍵⍪next
+ ⍝        ⎕←⍵ basin next searched
+             0=≢next:⍺⍪basin
+             ∪⍵ _ _ basin⊂⍤∇⍤99 1⊢next
+         }
+
+         Search ⍵
+
+
+
+
+         ∇ 1⌷basin
+
+         searched⍪←basin
+
+         ci←<∘1 1 _K>∘(⍴⍵)_K d(+⍤1)⍵
+         ci←{⍵⌿⍨~∨/⍵<⍤1⊢1 1}{⍵⌿⍨~∨/⍵>⍤1⊢⍴h}d+⍤1⊢⍵
+         basin←⍺ Remove⍨ci⌿⍨9≠h⌷⍤1 99⍨ci
+
+
+         next←⍺ Remove⍨next Remove ⍵
+
+         0≠≢next:basin ∇⍤99 1⊢next
+         ≢basin
+         ⎕←next
+         0=≢next:1
+         +/∇⍤1⊢next
+     }
+
+
+     ×/¯3↑∆≢¨Basin¨bi
+ }

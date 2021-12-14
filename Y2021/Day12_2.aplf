@@ -1,0 +1,13 @@
+ Day12_2←{
+⍝ Parse input graph
+     _←''∘⎕NS¨'#.kit.'∘,¨'snl' 'spl' '∆'
+     i←'-'spl¨snl ⍵
+     n←∪⊃,/i
+     (s e)←n∘⍳'start' 'end'
+     g←,0 1↓∆⊃{⍺,⊂⍵}⌸/↓⍉↑(⊢,⌽¨)n∘⍳¨i
+     sc←⍸(~n∊'start' 'end')∧∧/¨∊∘(¯1 ⎕C ⎕A)¨n   ⍝ Small caves
+     o←s  ⍝ origin
+     count←0
+     g Paths s e ⍬
+     'path'⎕CY'dfns'
+ }

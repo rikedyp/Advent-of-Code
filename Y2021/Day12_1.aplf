@@ -1,0 +1,27 @@
+ Day12_1←{
+⍝ Parse input graph
+     _←''∘⎕NS¨'#.kit.'∘,¨'snl' 'spl' '∆'
+     i←'-'spl¨snl ⍵
+     n←∪⊃,/i
+     (s e)←n∘⍳'start' 'end'
+     g←,0 1↓∆⊃{⍺,⊂⍵}⌸/↓⍉↑(⊢,⌽¨)n∘⍳¨i
+     sc←⍸(~n∊'start' 'end')∧∧/¨∊∘(¯1 ⎕C ⎕A)¨n   ⍝ Small caves
+     o←s  ⍝ origin
+     count←0
+     Paths←{
+         a←'abcdefghijklmnopqrstuvwxyz'
+         g←⍺
+         (s e vs)←⍵
+         s=e:{count∘←count+1 ⋄ ⍵}e  ⍝ THE END
+         n←s⊃g
+ ⍝    ⎕←s e vs
+         s∊vs:⍬   ⍝ Already visited small cave or start
+         0=≢n:⍬ ⍝ Dead end
+         next←(n,¨e),¨⊂⊂vs,s⌿⍨s∊sc,o
+ ⍝    ⎕←next
+         ⊃,/s∘,¨g∘∇¨next
+     }
+     _←+/6=g Paths s e ⍬
+     count
+     'path'⎕CY'dfns'
+ }

@@ -1,0 +1,9 @@
+ Day10_1←{
+⍝ Thanks to @rak1507 for the solution
+⍝ Quite neat with ⎕R, I decided to try a pure APL solution
+     R←{⍵⌿⍨~t∨¯1⌽t←∨⌿2=0,1⌽2-/-⌿(2 4⍴'([{<)]}>')∘.=⍵}⍣≡   ⍝ Remove empty chunks
+     r←R¨snl ⍵
+     ⍝ a←'\(\)|<>|\{\}|\[\]'
+     ⍝ r←a ⎕R''⍣≡¨snl ⍵        ⍝ Regex version
+     +/3 57 1197 25137[0~⍨∊⊃¨5~⍨¨')]}>'∘⍳¨r]
+ }

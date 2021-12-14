@@ -1,0 +1,11 @@
+ Day13_1←{
+     _←''∘⎕NS¨'#.kit.'∘,¨'snl' 'spl' 'sec' '∆'
+     ⎕IO←0
+     (c f)←sec ⍵
+     p←⍸⍣¯1 ∆⍎¨snl c
+⍝     ⊃⌽' '(≠⊆⊢)⊃snl 1↓f
+     (a n)←'='(≠⊆⊢)⊃⌽' '(≠⊆⊢)⊃snl 1↓f
+     n←⍎n ⋄ a←'xy'⍳a ⋄ h←n@a⍴p
+     t←h↑n↑[a]p ⋄ b←h↑⌽[a](n-1)↓[a]p
+     +/,t∨b
+ }
