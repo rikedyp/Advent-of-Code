@@ -1,0 +1,29 @@
+ Day14_2←{
+     _←''∘⎕NS¨'#.kit.'∘,¨'sec' 'snl' 'spl' '∆'
+     (o i)←1 1⊂sec ⍵
+     o←⊃o ⋄ i←snl⊃i
+     i←↑' ->'∘spl¨i ⋄ u←∪∊⊢/i
+     (k v)←↓⍉i ⋄ v←u⍳∊v
+     r←k⍳↑{(⍵,⍨⊃⍺)(⍵,⊢/⍺)}/i  ⍝ Transform-generation rules
+     pc←+/⍤⍷∘o¨⊣/i ⍝ Initial count of patterns
+
+     n←(⍳≢k)∊∪,r
+     si←⊂⍋ur←∪,r
+     oi←(⍳≢k)∊ur
+     c←+/u∘.=o
+     Ins←{
+         n←oi
+         c∘←c+v{+/⍵}⌸⍵
+         (n/n)←si⌷(,r){+/⍵}⌸(2/⍵)
+         n
+     }
+     _←Ins⍣40⊢pc
+     (⌈/-⌊/)c
+
+     Ins←{
+         c[⍵/v]+←1
+         ⍸⍣¯1 ∆,⍵⌿r
+     }
+     _←Ins⍣40⊢pc
+     (⌈/-⌊/)c
+ }
