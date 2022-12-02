@@ -1,0 +1,12 @@
+ Day2←{
+     l←⍉(⍴s)⍴∊s←⎕CSV⍠'Separator' ' '⊢⍵
+     s←(↑'ABC' 'XYZ')(⍳⍤1)l
+     RPS←{1=⍺:⍺,3|⍵ ⋄ 2=⍺:⍺,⍵ ⋄ 3=⍺:⍺,⍵+3×1=⍵}
+     res←-×-⌿⍉↑RPS⌿s
+     shape←⊢⌿s
+     part1←shape+.+3+3×res
+     res←¯2+⊢⌿s
+     FIX←{1=⍵:2 3 1⍳⍺ ⋄ 2=⍵:⍺ ⋄ 3=⍵:3 1 2⍳⍺}
+     shape←FIX⌿s
+     part2←shape+.+3+3×res
+ }
