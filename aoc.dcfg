@@ -1,0 +1,7 @@
+{
+	Settings: {
+		       MAXWS: "4G",                      // Lots of memory so we can brute force things
+		SESSION_FILE: "/d/DyalogSE/RP182.dse",   // Contains ]box on and ]rows on settings
+		          LX: "⎕SE.Link.Create # '.'"    // Save work automatically to this folder
+	}
+}

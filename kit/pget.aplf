@@ -1,5 +1,5 @@
  p←pget(year day);h
- h←⎕NEW HttpCommand
+ h←⎕NEW #.HttpCommand
  h.Headers←':'((~<\⍤=)⊆⊢)¨1↓snl headers
  h.URL←'https://adventofcode.com/',(⍕year),'/day/',(⍕day),'/input'
  p←¯1↓(h.Run).Data   ⍝ Drop last newline - causes issues for vector input
