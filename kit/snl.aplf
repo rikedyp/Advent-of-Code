@@ -1,1 +1,3 @@
- snl←{(⎕UCS 10 13)((~∊⍨)⊆⊢) ⍵}
+ snl←{⍝ Split on New Lines
+     (⎕UCS 10 13)((~∊⍨)⊆⊢)⍵
+ }
