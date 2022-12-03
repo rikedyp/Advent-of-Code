@@ -1,6 +1,7 @@
  Day3←{
+⍝ ⍵: pget 2022 3
      a←(¯1 ⎕C ⎕A),⎕A
-     part1←+/a⍳(⊃¨∩⌿)¨{(l∘↑,⍥⊂l∘↓)⍵⊣l←0.5×≢⍵}¨s←(⎕UCS 13)(≠⊆⊢)∊⍵
-     part2←+/a⍳∊(∪¨∩⌿)¨((n⍴3↑1)⊂s)⊣l←3÷⍨n←≢s←(⎕UCS 13)(≠⊆⊢)∊⍵
-
+     s←snl ⍵
+     part1←+/a⍳{⊃⊃∩⌿⍵⊂⍨l⍴1↑⍨0.5×l←≢⍵}¨s   ⍝ Intersection of halves from each rucksack
+     part2←+/a⍳(⊃∘⊃∩⌿)¨(s⊂⍨n⍴3↑1)⊣n←≢s    ⍝ Intersection of every 3 rucksacks
  }
