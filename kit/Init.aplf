@@ -1,0 +1,3 @@
+ Init ns
+ ns ⎕NS #.kit           ⍝ Copy names from #.kit to ⍎ns (usually supply ⍕⎕THIS)
+ (⍎ns).⎕EX'Init' 'ns'   ⍝ Don't need after
