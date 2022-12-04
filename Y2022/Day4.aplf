@@ -1,5 +1,5 @@
  Day4←{
      (b t)←⊂⍤¯1⍉(≢s)2 2⍴∊2⊃¨'-,'∘⎕VFI¨s←snl i   ⍝ bottoms, tops
      part1←+/((≤⌿b)∧≥⌿t)∨(≥⌿b)∧≤⌿t
-     part2←+/0≤(⌊/t)-⌈/b
+     part2←+/0≤(⌊⌿t)-⌈⌿b
  }
