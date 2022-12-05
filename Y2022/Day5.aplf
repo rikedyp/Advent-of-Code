@@ -1,0 +1,9 @@
+ Day5←{
+     (sd ins)←sec ⍵
+     s←s⊂⍨∨⌿'['∊⍨s←↑snl sd
+     cns←⍎∘,¨¯1↑¨s
+     c←{'[ ]'~⍨,¯1↓⍵}¨s
+     i←⊃∘(//⎕VFI)¨snl ins
+     part1←⊃¨c{0∊⍴⍵:⍺ ⋄ c←⍺ ⋄ (n f t)←⊃⍵ ⋄ c[t],⍨←⊂⌽n↑f⊃c ⋄ c[f]↓⍨←n ⋄ c ∇ 1↓⍵}i
+     part2←⊃¨c{0∊⍴⍵:⍺ ⋄ c←⍺ ⋄ (n f t)←⊃⍵ ⋄ c[t],⍨←⊂n↑f⊃c ⋄ c[f]↓⍨←n ⋄ c ∇ 1↓⍵}i
+ }
