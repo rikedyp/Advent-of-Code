@@ -1,9 +1,17 @@
  Day5←{
-     (sd ins)←sec ⍵
-     s←s⊂⍨∨⌿'['∊⍨s←↑snl sd
-     cns←⍎∘,¨¯1↑¨s
-     c←{'[ ]'~⍨,¯1↓⍵}¨s
-     i←⊃∘(//⎕VFI)¨snl ins
-     part1←⊃¨c{0∊⍴⍵:⍺ ⋄ c←⍺ ⋄ (n f t)←⊃⍵ ⋄ c[t],⍨←⊂⌽n↑f⊃c ⋄ c[f]↓⍨←n ⋄ c ∇ 1↓⍵}i
-     part2←⊃¨c{0∊⍴⍵:⍺ ⋄ c←⍺ ⋄ (n f t)←⊃⍵ ⋄ c[t],⍨←⊂n↑f⊃c ⋄ c[f]↓⍨←n ⋄ c ∇ 1↓⍵}i
+     (sd ins)←sec ⍵   ⍝ Stack Definition, Instructions
+     sts←sts⊂⍨∨⌿'['∊⍨sts←↑snl sd   ⍝ Stacks split into character vectors
+     c←{'[ ]'~⍨,¯1↓⍵}¨sts          ⍝ Stack of Crates as nested vector of character vectors
+     i←⊃∘(//⎕VFI)¨snl ins          ⍝ Instructions as nested vector of 3-element numeric vectors
+     _Proc←{                ⍝ Procedure operator
+         0∊⍴⍵:⍺             ⍝ No more instructions, return stacks
+         c←⍺                ⍝ Assign stacks to name so we can modify their contents
+         (n f t)←⊃⍵         ⍝ Number of crates, From stack, To stack
+         c[t],⍨←⊂⍺⍺ n↑f⊃c   ⍝ Copy crates from f to t. ⍺⍺ can be used to reverse ⌽ or keep order ⊢
+         c[f]↓⍨←n           ⍝ Drop moved crates in f
+         c ∇ 1↓⍵            ⍝ Next instruction
+     }
+     part1←⊃¨c⌽_Proc i   ⍝ One crate at a time, order reverses on move
+     part2←⊃¨c⊢_Proc i   ⍝ Many crates at a time, order stays same
+     part1 part2
  }
