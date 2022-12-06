@@ -1,4 +1,12 @@
  Day6←{
-     part1←3+⊃⍸4=≢¨∪¨4,/⍵
-     part2←13+⊃⍸14=≢¨∪¨14,/⍵
+     FindFirstPacket←{
+         (⍺-1)+⊃⍸⍺=≢∘∪¨⍺,/⍵
+    ⍝                  ⍺,/⍵   ⍝ Moving windows of size ⍺
+    ⍝              ≢∘∪¨       ⍝ Count unique elements
+    ⍝          ⊃⍸⍺=           ⍝ First occurance of ⍺ unique elements
+    ⍝    (⍺-1)+               ⍝ Offset marker length
+     }
+     part1←4 FindFirstPacket ⍵
+     part2←14 FindFirstPacket ⍵
+     part1 part2
  }
