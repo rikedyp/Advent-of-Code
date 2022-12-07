@@ -1,0 +1,75 @@
+Day7←{
+⍝ non-$ is items
+    fs←''
+⍝ id depth type
+⍝ non-$ block
+    ⎕IO←0
+    out←↑snl⍵
+    cmd←'$'=⊣/out
+    ls←'$ ls'(∨/⍤⍷)⍤1⊢4↑⍤1⊢out
+
+⍝  ls inserts nodes into the tree
+⍝  cd changes pointer where to insert nodes
+⍝ grab contents
+    le←((⍸,≢)cmd)⌷⍨⊂1+(1+⍸ls)⍸⍨(⍸cmd)   ⍝ list endings
+    dirs←{1↓∘⍉¨('$'=⊣/⍵)⊂⍉⍵}out⌿⍨≠\ls∨(≢ls)↑⍸⍣¯1⊢le
+⍝ find directory pointers
+    Walk←{
+        ⎕IO←0
+        0∊⍴⍵:d
+        ⍺←''
+        c←0⌷⍵
+    ⍝⎕←c
+⍝ cd moves pointer and appends nxt
+        Up←{⍵⌿⍨⌽∨\⌽'/'=⍵}
+        Down←{'/'≡⍥,⍵:⍵ ⋄ ⍺,'/',⍨⊃⌽' '(≠⊆⊢)⍵}
+        nxt←⍺{'$ cd'≡4↑⍵:⍺{n←⊃⌽' '(≠⊆⊢)⍵ ⋄ '..'≡n:Up ¯1↓⍺ ⋄ ⍺Down n}⍵⋄⍺}c
+⍝ ls puts path into d
+        d∘←{'$ ls'≡4↑⍵:d,⊂nxt⋄d}c
+    ⍝⎕←nxt d
+        nxt  ∇1↓⍵
+    }
+
+    d←''
+
+    d←Walk out
+
+    isdir←'dir'∘(∨/⊣⍷4↑⊢)⍤1¨dirs
+    sums←+/⍤∊¨(//⎕VFI)⍤1¨(~isdir)⌿¨dirs
+    subs←,∘'/'¨¨(⊂¨d),¨¨isdir{⊂⍤⊃∘⌽⍤1⊢' '(≠⊆⊢)⍤1⊢⍺⌿⍵}¨dirs
+
+    Total←{0∊⍴⍵:0 ⋄ i←d⍳⍵ ⋄ +/(sums⌷⍨⊂i),∇¨subs⌷⍨⊂i}
+
+    totals←sums+Total¨subs
+
+    part1← {+/⍵⌿⍨⍵<1e5}totals
+
+⍝ PART 2
+    avail←  70000000
+    min←  30000000
+    need←min-avail-⊃totals
+
+    part2←⌊/totals⌿⍨totals≥need
+    part1 part2
+
+
+
+
+⍝ Compute dir totals
+
+
+
+
+    d←'' ⋄ i←0
+    Walk out
+⍝ build tree
+
+    Walk cmd
+
+
+    cmd←'$'=⊣/↑snl ⍵
+    i←⍳+/~cmd
+    '$ ls' '$ cd'(∨/(⊃⍤⊣⍷⊢))⍤0 99⊢cmd
+    d←0
+    n←'/'
+}
