@@ -1,0 +1,17 @@
+Day8←{
+    t←⍎¨↑snl ⍵
+    L←{1,¯2>/⌈\⍵}
+⍝ Count visible trees, looking in from west, east  , north ,   south
+    part1←   +/,                      ( L  ∨ ⌽∘L∘⌽ ∨ ⍉∘L∘⍉ ∨ ⍉∘⌽∘L∘⌽∘⍉) t
+
+
+⍝ Count trees visible from this tree, looking out to the
+⍝                          west, east, north, south
+    V←{0 1,⍤1{¯1++/(⊢∨0,¯1∘↓)∧\1@0⊢⍵<⊃⍵}¨2(↓⍤1)⌽¨,\⍵}
+
+
+    ⌈/,(V × ⌽∘V∘⌽ × ⍉∘V∘⍉ × ⍉∘⌽∘V∘⌽∘⍉)t
+
+
+
+}
