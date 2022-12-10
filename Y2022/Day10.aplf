@@ -1,0 +1,14 @@
+Day10←{
+    ⎕IO←0
+    ins←snl ⍵
+    (i v)←↓⍉↑' '(≠⊆⊢)¨ins
+    mt←(∨/∊)∘⎕D¨v
+    y←mt\⍎¨mt/v
+    ins←+\1+'noop' 'addx'⍳i
+    x←1@0⊢0⍴⍨2+⌈⌿ins
+    x[ins]←y
+    n←20+40×⍳6
+    part1←n+.×(+\x)[¯1+n]
+    part2←6 40⍴∨⌿(40|⍳≢x)=⍤1⊢¯1 0 1∘.++\x
+    part1 part2
+}
