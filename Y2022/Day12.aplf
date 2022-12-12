@@ -9,6 +9,7 @@
      g←mask/⍥,¨{⊂⍺↓⍵}⌺3 3⊢(⍴m)⍴(⍴m)∘⊥¨⍳⍴m
      w←mask/⍥,¨{⊂⍺↓⍵}⌺3 3⊢m
      wg←↑,¨g w
+     'wpath'⎕cy'dfns'
      part1←¯1+≢wg wpath s e
      part2←⌊⌿0~⍨¯1+≢¨wg∘wpath¨(⍸1=,m),¨e
      part1 part2
