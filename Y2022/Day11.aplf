@@ -1,0 +1,35 @@
+Day11←{
+    ⎕IO←0
+    _←'big'⎕CY'dfns'
+    defs←snl¨sec ⍵
+    N←{⍺←' ' ⋄ ⊃(//⍺∘⎕VFI)⍵}
+    P←{
+        m←⎕NS'big'
+        (n wl op test p f)←⍵   ⍝ Monkey number, worry level, inspection operation, test, pass, fail
+        m.n←':'N n
+        m.wl←∊' ,'N wl
+        m.op←⍎'{','}',⍨'old' '\*' '/'⎕R(,¨'⍵' '(×big)' '(÷big)')⊢⊃⌽'='(≠⊆⊢)op
+⍝ TODO:
+         ⍝ ⍺ old, ⍵ new, dfn
+        m.test←⍎'(0=',(⍕N test),'∘(|big))'
+        m.(p f)←∊N¨p f
+        m
+    }
+    m←P¨defs
+    Turn←{
+        r←⍵
+        mon←⍺⊃r
+        mb[⍺]+←≢mon.wl
+        mon.(wl←op wl)
+        mon.(wl←{⍵↓⍨-2+⍸'.'=⍵}wl÷big 3)
+        res←mon.(test wl)
+        r[mon.p].wl,←res/mon.wl
+        r[mon.f].wl,←(~res)/mon.wl
+        mon.wl←⍬
+        r
+    }
+    Round←{⍺←0 ⋄ ⍺≥≢⍵:⍵ ⋄ r←⍺ Turn ⍵ ⋄ (⍺+1)∇ ⍵}
+    mb←0⍨¨m
+    r←Round⍣20⊢m
+    ×/2↑(⊂∘⍒⌷⊢)mb
+}
