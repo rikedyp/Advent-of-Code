@@ -1,0 +1,15 @@
+ Day12←{
+     ⎕IO←0
+     map←↑snl ⍵
+     (s e)←⍸¨↓'SE'∘.=,map
+     m←1+(¯1 ⎕C ⎕A)⍳(⍴map)⍴'az'@s e,map
+     _←'path'⎕CY'dfns'
+     nesw←3 3⍴0 1 0 1
+     mask←{⊂⍺↓nesw∧⍵≤1+1 1⌷⍵}⌺3 3⊢m
+     g←mask/⍥,¨{⊂⍺↓⍵}⌺3 3⊢(⍴m)⍴(⍴m)∘⊥¨⍳⍴m
+     w←mask/⍥,¨{⊂⍺↓⍵}⌺3 3⊢m
+     wg←↑,¨g w
+     part1←¯1+≢wg wpath s e
+     part2←⌊⌿0~⍨¯1+≢¨wg∘wpath¨(⍸1=,m),¨e
+     part1 part2
+ }
