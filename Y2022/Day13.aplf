@@ -1,0 +1,7 @@
+ Day13←{
+     p←⎕JSON¨¨snl¨⍵ sec ⍵
+     part1←+/⍸(⊢≡∆)¨p
+     p←⎕JSON¨snl ⍵
+     d←(,⊂,2)(,⊂,6)
+     ×/(∆ p,d)⍳d
+ }
