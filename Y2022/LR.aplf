@@ -1,0 +1,9 @@
+ LR←{   ⍝ Move left or right
+ ⍝    ⎕←⍺ ⍵
+     f←⍸2=⍵ ⋄ r←⍸1=⍵   ⍝ falling, rocks
+     m←0 ⍺∘+¨f        ⍝ potential move
+     ∨/⊢/¨0≥m:⍵       ⍝ edge on the left?
+     ∨/⊢⌿¨(⍴⍵)∘<¨m:⍵  ⍝ edge on the right?
+     ∨/r∊m:⍵          ⍝ rock in the way?
+     2@m⊢0@f⊢⍵        ⍝ move rock
+ }

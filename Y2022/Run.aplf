@@ -1,0 +1,9 @@
+ Run←{
+     ⎕IO←0
+     m ri ii←⍵   ⍝ map, rock index, instruction index
+     rock←r⊃⍨ri|⍨≢r
+     m←rock Spawn m     ⍝ spawn new rock
+     (m ii)←m Fall ii i   ⍝ fall new rock
+     ri ii+←1
+     m ri ii
+ }

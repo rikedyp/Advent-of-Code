@@ -1,0 +1,12 @@
+ Fall←{
+     m←⍺ ⋄ (i ins)←⍵
+     0∊⍴ins:(0≠m)i  ⍝ map, last instruction used
+ ⍝    ⎕←''
+ ⍝    ⎕←⍺
+     ⎕IO←0
+     do←ins⊃⍨i|⍨≢ins
+     r←do LR m
+     (e r)←D r
+     e:r ∇ i ⍬ ⍝ reached rest?
+     r ∇(i+1)ins
+ }
