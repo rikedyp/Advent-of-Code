@@ -1,0 +1,29 @@
+ Day14←{
+     p←↑snl ⍵
+     stack←{⊂⍺+¯1+⍳≢⍵}⌸¨{(1,1+⍵)[1+⍵⍸⍺]}⌿⊂⍤⍸⍤1⊢'O#'∘.=⍉p
+     len←1+≢p
+     p1←+/∊len-stack
+
+     Load←{
+         stack←{⊂⍺+¯1+⍳≢⍵}⌸¨{(1,1+⍵)[1+⍵⍸⍺]}⌿⊂⍤⍸⍤1⊢'O#'∘.=⍉⍵
+         len←1+≢⍵
+         +/∊len-stack
+     }
+
+     Load←{(⌽⍳≢⍵)+.×+/'O'=⍵}
+⍝ Try to compute directly from co-ordinates? But then how to rotate...
+     Tilt←{
+         sup←(⊂⍤⍸⍤1)'#'=⍵
+         rock←(⊂⍤⍸⍤1)'O'=⍵
+         stack←{⊂⍺+¯1+⍳≢⍵}⌸¨rock{(1,1+⍵)[1+⍵⍸⍺]}¨sup
+         rock2←(⊃,/)⍣2⊢stack,⍨¨¨¨⍳≢stack
+         sup2←(⊃,/)⍣2⊢sup,⍨¨¨¨⍳≢sup
+         'O'@rock2⊢'#'@sup2⊢'.'⍨¨⍵
+     }
+     c←⍬
+     Cycle←{⌽Tilt⌽⊖⍉Tilt⍉⊖Tilt⍉Tilt⍉⍵}
+     Loop←{c∊⍨⊂⍵:c∊⊂⍵ ⋄ c,←⊂⍵ ⋄ ∇ Cycle ⍵}
+     b←Loop p
+     n←⍬⍴s+(1000000000-s)|⍨1+(≢b)-s←⍸b
+     Load Cycle⍣n⊢p
+ }

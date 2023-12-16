@@ -1,0 +1,6 @@
+ Day1←{
+     p1←+/⍎¨(⊃,⊃∘⌽)¨(⊢⊢⍤⌿⍨∊∘⎕D)¨nl spl ⍵
+     word←'one' 'two' 'three' 'four' 'five' 'six' 'seven' 'eight' 'nine'
+
+     word∘{n←⍸⍺(∨/⍷)¨⊂⍵ ⋄ ((⊃,⊢/)d)/(⊃,⊃∘⌽)⍵⌿⍨d←⍵∊⎕D ⋄ ⎕D∊⍸⍉↑⍺∘.⍷⊂⍵}¨nl spl ⍵
+ }

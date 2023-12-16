@@ -1,0 +1,15 @@
+ Day12←{
+   ⍝ find places where contiguous block length ⊃n can begin
+   ⍝ existing # must exist
+     ⍝Ctg←(≢(⊢-⍨1↓⊢,1+⊣)⍸)
+     ⍝{⎕←n←⍎⍵ ⋄ ⍺↓⍨(⌊0.5×⊃n)+⍸(⊃n)=⊢∘(+/)⌺(⊃n)⊢'#'=⍺}/6⊃' 'spl¨snl ⍵
+     ⍝{⎕←n←⍎⍵ ⋄ i←⊃n ⋄ nxt←↓∘⍺¨⍸i=⊢∘(+/)⌺i⊢⍺∊'?#' ⋄ nxt ∇¨⊂⍕1↓n}/2⊃' 'spl¨snl ⍵
+     (p n)←↓⍉↑' 'spl¨snl ⍵ ⋄ n←⍎¨n
+     p Count⍥(3∘⊃)n
+     '?##??##???'Count 3 3 1 ⍝
+     '???##???'Count 4 1 ⍝ 3
+     '??#?#???'Count 4 1   ⍝ 3
+     '?##??????'Count 3 2 1 ⍝ ?
+     0∊⍴⍵:1   ⍝ end of input: found 1 combination
+   ⍝ chop ⍺ and recurse with 1↓⍵
+ }
