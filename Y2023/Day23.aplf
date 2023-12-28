@@ -1,0 +1,68 @@
+ Day23←{
+     ⎕IO←0
+     map←↑snl ⍵
+     mask←3 3⍴0 1 0 1 0 1
+     NB←{
+         ⍝ neighbours
+         ⍝3 3≡(⊂1 1)⊃⍵:∘∘∘
+         3≥i←'<>v^'⍳this←map[here←1 1⌷⍵]:here+(0 ¯1)(0 1)(1 0)(¯1 0)[i] ⍝ arrow: must go in direction of slope
+         '#'=this:⍬
+         nbr⌿⍨'.v^<>'∊⍨map[nbr←mask⌿⍥(,⍺∘↓)⍵] ⍝ otherwise can go to neighbouring dots
+     }
+     graph←(⍴map)∘⊥¨¨@(×≢¨)g←,⊂⍤NB⌺3 3⊢⍳⍴map ⍝ find neighbours and convert from 2D map co-ordinates to linear node indices
+
+     (start end)←(⍴map)∘⊥¨(⊣/,⊢/)⍸'.'=map
+     p←0
+     Paths←{
+         ⍺←⍬                   ⍝ default start with empty path
+         end∊⍺:⍬⊣p⌈←≢⍺⊣⍞←'x'    ⍝ reached end: keep longest path length
+         0∊⍴nxt←(⍵⊃graph)~⍺:⍬   ⍝ nowhere to go from here: ignore dead end
+         (⍺∘,¨⍵)∇¨nxt           ⍝ recursively follow all nodes accessible from here
+     }
+
+     _←Paths start
+     ⎕←p1←¯1+p
+     p←⍬
+     Paths←{
+         ⍺←⍬
+         end∊⍵:⍬⊣p,←⊂⍺⊣⍞←'x' ⍝ reconstruct path from tree
+         ⍝ uvtd←⊃(⍸0<≢¨graph)~v
+         ⍝ ⍸uvtd∊¨graph
+         0∊⍴nxt←(∪∊graph[⍵])~⍺:⍬
+         2≤≢nxt:(⍺,⍵)∘∇¨nxt ⍝ split path
+         (⍺,⍵)∇ nxt
+     }
+
+     ⍝ queue of nodes to visit (nxt)
+     ⍝ visited nodes (v)
+     ⍝ reconstruct path
+     v←⍬ ⋄ l←0
+     Paths←{
+         ∨/v∊⍨⍞←⊃⍵: ⍝ already visited, ignore or use to complete graph?
+         v,←⊃⍵
+         0∊⍴nxt←(∪∊graph[⊃⍵])~v:⍵
+         end∊⊃⍵:∘∘∘⊣l⌈←≢⍵ ⍝ ∘∘∘∇ 1+v⌷⍨⍸<\1≠¯2-/v ⍝ note length and start again from next unvisited node
+         ∇ ⍵,⍨⊂nxt
+         ⍝ if you reach a previously visited node,
+     }
+     r←⍬ Paths start
+
+     map[⍸map∊'<>v^']←'.'   ⍝ treat slopes as normal steps
+     graph←(⍴map)∘⊥¨¨@(×≢¨),⊂⍤NB⌺3 3⊢⍳⍴map
+     _←Paths start
+     ¯1+p
+
+
+     Paths
+
+     Paths←{
+         ⍺←⍬ ⍝ default start from empty path
+         ∨/e←end∊¨⍺:(e/⍺),(⍺/⍨~e)∇ nxt ⍝ reached the end, return completed paths and continue with remaining
+         nxt←graph[⍵]
+         0∊⍴nxt←⍵⊃graph:⍬ ⍝ nowhere to go, did not reach end
+         (⍺,¨⍵)∇¨
+     }
+
+     p←Paths start
+
+ }
