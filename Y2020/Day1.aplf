@@ -1,6 +1,6 @@
  Day1←{
 ⍝ ⍺: part (1 or 2)
-⍝ ⍵: numeric problem input
+⍝ ⍵: problem input
 ⍝ ←: answer
-     ×/⍵⌷⍨1⌷⍸2020=(⍵∘.+⊢)⍣⍺⊢⍵
+     ×/n I⊃⍸2020=(n∘.+⊢)⍣⍺⊢n←⍎¨snl ⍵
  }
